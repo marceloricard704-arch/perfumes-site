@@ -1,0 +1,21 @@
+RL Perfumaria - Site atualizado
+
+Arquivos:
+- index.html
+- style.css
+- script.js
+- pasta img/
+
+Coloque suas fotos na pasta img com estes nomes:
+- capa.jpg
+- produto1.jpg
+- produto2.jpg
+
+Atualizações:
+- Endereço
+- Bairro
+- WhatsApp
+- Telefone
+- E-mail
+
+Depois, abra o arquivo index.html no navegador.
