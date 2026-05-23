@@ -44,7 +44,7 @@
       justify-content: center;
     }
 
-    /* 2. A FOTO: Inteira e sem cortes (object-fit: contain) */
+    /* 2. A FOTO: Inteira e sem cortes */
     .card-img img {
       max-width: 100%;
       max-height: 100%;
@@ -93,12 +93,6 @@
       margin-bottom: 5px;
     }
 
-    .parcelamento {
-      font-size: 13px;
-      color: #888;
-      margin-bottom: 20px;
-    }
-
     .btn-card {
       display: block;
       text-align: center;
@@ -115,7 +109,34 @@
       background: #C19A5B;
     }
 
-    /* Estilo do botão fixo do WhatsApp se não estiver no seu style.css */
+    /* 🎛️ BOTÕES DE FILTRO (TODOS, MASCULINO, FEMININO) */
+    .filtros {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 30px 0 15px 0;
+    }
+
+    .btn-filtro {
+      background: #f4f4f4;
+      color: #333;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 15px;
+      border: 1px solid #ddd;
+      cursor: pointer;
+      outline: none;
+      transition: 0.3s ease;
+    }
+
+    .btn-filtro.ativo, .btn-filtro:hover {
+      background: #222;
+      color: #fff;
+      border-color: #222;
+    }
+
+    /* Estilo do botão fixo do WhatsApp */
     .whatsapp-fixo {
       position: fixed;
       bottom: 20px;
@@ -134,29 +155,26 @@
       z-index: 1000;
     }
 
-    /* 🔥 NOVOS ESTILOS PARA AS ABAS DE FILTRO */
-    .filtro-abas {
+    /* 🔥 AJUSTE DA FOTO DE CAPA */
+    .hero {
+      position: relative;
+      background-image: url('img/capa.jpg');
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      min-height: 70vh;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 60px 20px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
       text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .btn-filtro {
-      background: transparent;
-      border: 2px solid #222;
-      color: #222;
-      padding: 10px 24px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      margin: 5px;
-      border-radius: 50px;
-      transition: all 0.3s ease;
-    }
-
-    .btn-filtro:hover, .btn-filtro.ativo {
-      background: #C19A5B;
-      border-color: #C19A5B;
-      color: #fff;
     }
   </style>
 </head>
@@ -176,11 +194,7 @@
   </header>
 
   <section class="hero" id="inicio">
-    <div class="overlay"></div>
     <div class="hero-content">
-      <span class="destaque">Fragrâncias que encantam</span>
-      <h1>Elegância em cada essência</h1>
-      <p>Perfumes inspirados, sofisticados e marcantes para elevar sua presença em qualquer ocasião.</p>
       <div class="hero-buttons">
         <a href="#produtos" class="btn dourado">Ver Produtos</a>
         <a href="https://wa.me/5514997254815" target="_blank" class="btn transparente">Chamar no WhatsApp</a>
@@ -190,7 +204,7 @@
 
   <section class="beneficios">
     <div class="beneficio"><h3>✨ Fragrâncias Marcantes</h3><p>Perfumes inspirados em aromas de sucesso.</p></div>
-    <div class="beneficio"><h3>🎁 Ótimos para Presentear</h3><p>Beleza, elegance e personalidade em cada frasco.</p></div>
+    <div class="beneficio"><h3>🎁 Ótimos para Presentear</h3><p>Beleza, elegância e personalidade em cada frasco.</p></div>
     <div class="beneficio"><h3>💬 Atendimento Rápido</h3><p>Faça seu pedido com praticidade pelo WhatsApp.</p></div>
   </section>
 
@@ -201,100 +215,110 @@
       <p>Seleção especial da RL Perfumaria para você escolher sua fragrância ideal.</p>
     </div>
 
-    <div class="filtro-abas">
-      <button class="btn-filtro ativo" onclick="filtrarProdutos('todos')">Todos</button>
-      <button class="btn-filtro" onclick="filtrarProdutos('masculino')">Masculino</button>
-      <button class="btn-filtro" onclick="filtrarProdutos('feminino')">Feminino</button>
+    <div class="filtros">
+      <button class="btn-filtro ativo" onclick="filtrarProdutos(this, 'todos', event)">Todos</button>
+      <button class="btn-filtro" onclick="filtrarProdutos(this, 'masculino', event)">Masculino</button>
+      <button class="btn-filtro" onclick="filtrarProdutos(this, 'feminino', event)">Feminino</button>
     </div>
 
     <div class="cards">
 
-  <div class="card" data-categoria="masculino">
-    <div class="card-img"><img src="img/produto1.jpg"></div>
-    <div class="card-body">
-      <span class="tag">Mais Vendido</span>
-      <h3>Fragrâncias Masculino MUGLER</h3>
-      <p>Principais Acordes: Frutado, Whisky, Amadeirado, Doce, Terroso, Especiado, Patcholi, Baunilha.</p>
-      <div class="preco">R$ 80,00</div>
-      <a href="https://wa.me/5514997254815?text=Quero%20o%201%20Million" class="btn-card">Comprar</a>
+      <div class="card">
+        <div class="card-img"><img src="img/produto1.jpg"></div>
+        <div class="card-body">
+          <span class="tag">Mais Vendido</span>
+          <h3>Fragrâncias Masculino MUGLER</h3>
+          <p>Principais Acordes: Frutado, Whisky, Amadeirado, Doce, Terroso, Especiado, Patcholi, Baunilha.</p>
+          <div class="preco">R$ 80,00</div>
+          <a href="https://wa.me/5514997254815?text=Quero%20o%201%20Million" class="btn-card">Comprar</a>
+        </div>
+      </div>
+
+      <div class="card"><div class="card-img"><img src="img/produto2.jpg"></div><div class="card-body"><span class="tag">Destaque</span>
+      <h3>Fragrâncias Masculino JEAN PAUL GAULTIER </h3><p>Principais Acordes: Baunilha, Doce, Mel, Aromático, Lavanda, Tabaco, Verde, Frescor, Atalcado.</p><div class="preco">R$ 80,00</div><a href="https://wa.me/5514997254815?text=212%20VIP" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto3.jpg"></div><div class="card-body"><span class="tag">Top</span>
+      <h3>Fragrâncias Masculino MARLY PARIS</h3><p>Principais Acordes: Tabaco, Baunilha, Quente e Picante, Canela, Doce, Âmbar, Lenhoso, Almiscarado, Pulverulento, Balsâmico.</p><div class="preco">R$ 80,00</div><a href="https://wa.me/5514997254815?text=Bleu" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto4.jpg"></div><div class="card-body"><span class="tag">Top</span>
+      <h3>Fragrâncias Masculino VIKTOR&ROLF</h3><p>Principais Acordes: Especiado Quente, Canela, Tabaco, Doce, Picante Suave, Couro, Aromático, Citrico.</p><div class="preco">R$ 80,00</div><a href="https://wa.me/5514997254815?text=Sauvage" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto5.jpg"></div><div class="card-body"><span class="tag">Disponível</span>
+      <h3>Fragrâncias Masculino MONTBLANC</h3><p>Principais Acordes: Amadeirado, Cítrico, Aromático, Âmbar, Almiscarado, Fresco Especiado, Oud, Picante Suave.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto6.jpg"></div><div class="card-body"><span class="tag">Disponível</span>
+      <h3>Fragrâncias Masculino PRADA</h3><p>Principais Acordes: Amadeirado, Atalcado, Floral, Aromático, Âmbar, Almiscarado, Terroso, Fresco.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto7.jpg"></div><div class="card-body"><span class="tag">Disponível</span>
+      <h3>Fragrâncias Masculino YVES SAINT LAURENT</h3><p>Principais Acordes: Aromático, Fresco Especiado, Amadeirado, Frutado, Âmbar e Cítrico.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto8.jpg"></div><div class="card-body"><span class="tag">Disponível</span>
+      <h3>Fragrâncias Masculino GIVENCHY</h3><p>Principais Acordes: Amadeirado, Aromático, Especiado, Floral, Doce, Âmbar, Cítrico e Baunilha.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto9.jpg"></div><div class="card-body"><span class="tag">Top</span>
+      <h3>Fragrâncias Masculino HUGO BOSS</h3><p>Principais Acordes: Aromático, Amadeirado, Cítrico, Fresco / Aquático, Especiado, Frutado, Almiscarado / Musky, Leather / Couro, Baunilha / Doce, Âmbar, Verde.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto10.jpg"></div><div class="card-body"><span class="tag">Top</span>
+      <h3>Fragrâncias Masculino DOLCE & GABBANA</h3><p>Principais Acordes: Aromático, Floral, Fresco, White Floral (Floral Branco), Aldeídico, Cítrico, Fresh Spicy (Especiado Fresco), Warm Spicy (Especiado Quente), Amadeirado, Frutado, Almiscarado (Musky).</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+<div class="card"><div class="card-img"><img src="img/produto11.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino CHANEL</h3><p>Principais Acordes: Cítrico, Aromático, Baunilha, Amadeirado, Atalcado, Almiscarado, Picante Suave, Doce, Fresco Especiado, Cremoso, Âmbar, Fresco, Elegante, Limpo, Refrescante.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto12.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino GISADA</h3><p>Principais Acordes: Frutado, Tropical, Doce, Amadeirado, Baunilha, Especiado Quente, Fresco Especiado, Aromático, Âmbar, Cítrico, Almiscarado, Fresco, Manga, Apimentado, Elegante.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto13.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino LOUISE VUITTON</h3><p>Principais Acordes: Amadeirado, Verde, Aromático, Atalcado, Balsâmico, Especiado Quente, Fresco Especiado, Cítrico, Solar, Cremoso, Elegante, Refrescante, Limpo, Almiscarado, Sofisticado.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto14.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino RABANNE</h3><p>Principais Acordes: Aromático, Fresco Especiado, Verde, Amadeirado, Cítrico, Lavanda, Amargo, Patchouli, Mentolado, Refrescante, Herbal, Elegante, Masculino, Intenso, Moderno.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto15.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino MARLY PARIS</h3><p>Principais Acordes: Tabaco, Baunilha, Especiado Quente, Âmbar, Canela, Doce, Amadeirado, Almiscarado, Atalcado, Balsâmico, Defumado, Incensado, Elegante, Quente, Sedutor.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto16.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino MAISIN MARTIN MARGIELA</h3><p>Principais Acordes: Tabaco, Doce, Baunilha, Rum, Amadeirado, Aromático, Picante Suave, Âmbar, Atalcado, Especiado Quente, Defumado, Alcoólico, Couro, Elegante, Sedutor.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+        
+      <div class="card"><div class="card-img"><img src="img/produto17.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino YVES SAINT LAURENT</h3><p>Principais Acordes: Cítrico, Floral Branco, Patchouli, Fresco Especiado, Amadeirado, Doce, Aromático, Almiscarado, Fresco, Âmbar, Atalcado, Terroso, Verde, Musgoso, Elegante, Moderno, Refrescante, Bergamota, Flor de Laranjeira, Amadeirado Floral, Sensual, Marcante, Versátil, Sedutor.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto18.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino CHANEL</h3><p>Principais Acordes: Cítrico, Aromático, Baunilha, Aldeídico, Marinho, Doce, Fresco Especiado, Fresco, Âmbar, Atalcado, Amadeirado, Almiscarado, Limpo, Elegante, Refrescante, Cremoso, Laranja, Aquático, Tonka, Picante, Energético, Vibrante, Sedutor, Esportivo.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+        
+      <div class="card"><div class="card-img"><img src="img/produto19.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino 212 VIP BLACK</h3><p>Principais Acordes: Baunilha, Picante Suave, Lavanda, Doce, Balsâmico, Atalcado, Anis, Aromático, Âmbar, Quente, Sedutor, Intenso, Licoroso, Envolvente, Masculino, Elegante, Sofisticado, Noturno, Gourmand, Refinado.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+       
+      <div class="card"><div class="card-img"><img src="img/produto20.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino 212 MEN</h3><p>Principais Acordes: Baunilha, Picante Suave, Lavanda, Doce, Balsâmico, Atalcado, Anis, Aromático, Âmbar, Quente, Sedutor, Intenso, Licoroso, Elegante, Amadeirado, Lavanda Negra, Alcaçuz Negro, Baunilha Negra, Marcante, Luxuoso.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto21.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino 212 VIP BLACK</h3><p>Principais Acordes: Baunilha, Aromático, Lavanda, Licoroso, Doce, Âmbar, Picante Suave, Balsâmico, Atalcado, Anis, Amadeirado, Quente, Sedutor, Intenso, Elegante, Noturno, Sofisticado, Sensual, Marcante, Envolvente, Luxuoso.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto22.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino FERRARI BLACK</h3><p>Principais Acordes: Frutado, Baunilha, Especiado Quente, Doce, Cítrico, Canela, Atalcado, Âmbar, Amadeirado, Floral Branco, Aromático, Fresco, Sedutor, Marcante, Quente, Envolvente, Clássico, Maçã, Ameixa, Bergamota, Cardamomo, Jasmim, Cedro, Almíscar, Versátil.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto23.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino RABANNE</h3><p>Principais Acordes: Baunilha, Frutado, Rosa, Doce, Amadeirado, Verde, Atalcado, Balsâmico, Floral, Aromático, Fava Tonka, Patchouli, Davana, Cedro, Osmanthus, Âmbar, Sedutor, Intenso, Sofisticado, Envolvente, Luxuoso, Refinado, Noturno, Poderoso.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto24.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino ANIMALE</h3><p>Principais Acordes: Aromático, Fresco Especiado, Cítrico, Lavanda, Amadeirado, Floral, Terroso, Couro, Musgoso, Fresco, Clássico, Elegante, Sedutor, Marcante, Refrescante, Herbal, Vetiver, Néroli, Limão, Gerânio, Zimbro, Musgo de Carvalho, Envolvente, Tradicional.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto25.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino ARNAF</h3><p>Principais Acordes: Amadeirado, Cítrico, Defumado, Fresco, Aromático, Âmbar, Almiscarado, Frutado, Especiado, Limão, Abacaxi, Bétula, Patchouli, Baunilha, Couro, Elegante, Masculino, Sofisticado, Marcante, Sedutor, Intenso, Refrescante, Limpo, Noturno, Poderoso, Moderno, Envolvente, Versátil, Refinado, Luxuoso.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto26.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino CHANEL</h3><p>Principais Acordes: Cítrico, Âmbar, Amadeirado, Fresco Especiado, Aromático, Especiado Quente, Fresco, Defumado, Balsâmico, Atalcado, Almiscarado, Elegante, Sofisticado, Masculino, Refrescante, Cedro, Incenso, Sândalo, Patchouli, Limão, Toranja, Hortelã, Pimenta Rosa, Moderno, Luxuoso, Marcante, Sedutor, Versátil, Limpo, Intenso.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto27.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino ROJA DOVE</h3><p>Principais Acordes: Amadeirado, Aromático, Fresco Especiado, Cítrico, Âmbar, Doce, Balsâmico, Musgoso, Terroso, Fresco, Couro, Defumado, Verde, Patchouli, Tabaco, Cipreste, Musgo de Carvalho, Incenso, Elegante, Sofisticado, Masculino, Intenso, Sedutor, Luxuoso, Marcante, Refinado, Envolvente, Natural.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto28.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino MARLY PARIS</h3><p>Principais Acordes: Baunilha, Doce, Canela, Âmbar, Especiado Quente, Floral Branco, Cremoso, Almiscarado, Pralinê, Amadeirado, Atalcado, Sedutor, Luxuoso, Elegante, Sofisticado, Masculino, Envolvente, Intenso, Refinado, Quente, Marcante, Gourmand, Viciante, Sensual, Moderno, Poderoso, Noturno, Exclusivo.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto29.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino AFNAN</h3><p>Principais Acordes: Cítrico, Almiscarado, Amadeirado, Fresco, Âmbar, Atalcado, Especiado Quente, Patchouli, Aromático, Refrescante, Bergamota, Mandarina, Musgo, Ambarado, Limpo, Masculino, Elegante, Sofisticado, Moderno, Sedutor, Intenso, Versátil, Envolvente, Marcante, Luxuoso, Aquático, Herbal, Refinado.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto30.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino LATTAFA</h3><p>Principais Acordes: Aromático, Fresco, Amadeirado, Cítrico, Âmbar, Lavanda, Especiado Suave, Almiscarado, Herbal, Verde, Masculino, Elegante, Sofisticado, Sedutor, Moderno, Refrescante, Limpo, Versátil, Marcante, Intenso, Maçã, Gengibre, Zimbro, Sálvia, Fava Tonka, Cedro, Vetiver, Envolvente, Refinado, Poderoso.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto31.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino LATTAFA</h3><p>Principais Acordes: Oud, Especiado Quente, Fresco Especiado, Patchouli, Metálico, Almiscarado, Amadeirado, Lavanda, Terroso, Couro, Açafrão, Noz-moscada, Incensado, Âmbar, Intenso, Masculino, Misterioso, Sofisticado, Marcante, Sedutor, Luxuoso, Envolvente, Poderoso, Oriental, Refinado, Noturno.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div> 
+
+      <div class="card"><div class="card-img"><img src="img/produto32.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino ASAD</h3><p>Principais Acordes: Baunilha, Cacau, Doce, Lavanda, Fresco Especiado, Âmbar, Especiado Quente, Aromático, Atalcado, Picante Suave, Bourbon Vanilla, Vetiver, Noz-moscada, Davana, Ameixa Mirabelle, Pimenta Rosa, Cremoso, Gourmand, Sedutor, Sofisticado, Intenso, Envolvente, Marcante, Luxuoso, Quente.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div> 
+
+      <div class="card"><div class="card-img"><img src="img/produto33.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino ASAD</h3><p>Principais Acordes: Âmbar, Fresco Especiado, Amadeirado, Especiado Quente, Baunilha, Doce, Tabaco, Atalcado, Patchouli, Balsâmico, Aromático, Café, Pimenta Preta, Abacaxi, Íris, Masculino, Sedutor, Intenso, Sofisticado, Marcante, Envolvente, Quente, Elegante, Refinado, Poderoso, Noturno, Luxuoso, Oriental, Viciante, Moderno.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto34.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino AZZARO</h3><p>Principais Acordes: Couro, Frutado, Doce, Aromático, Animálico, Cítrico, Especiado Quente, Defumado, Lavanda, Amadeirado, Framboesa, Cardamomo, Vetiver, Mandarina Verde, Bergamota, Sálvia Esclaréia, Masculino, Sedutor, Intenso, Sofisticado, Marcante, Luxuoso, Envolvente, Poderoso, Moderno, Elegante, Refinado, Noturno, Viciante, Exclusivo.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto35.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino LATTAFA</h3><p>Principais Acordes: Âmbar, Tuberosa, Floral Branco, Animálico, Almiscarado, Aromático, Cítrico, Especiado Quente, Amadeirado, Couro, Cardamomo, Toranja, Pimenta Rosa, Cashmeran, Ládano, Notas Solares, Artemísia, Masculino, Sedutor, Sofisticado, Intenso, Marcante, Luxuoso, Envolvente, Moderno, Refinado, Poderoso, Exclusivo, Elegante, Quente.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto36.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino BVLGARI</h3><p>Principais Acordes: Fresco Especiado, Âmbar, Especiado Quente, Metálico, Fresco, Picante Suave, Couro, Tabaco, Açafrão, Gengibre, Pimenta Rosa, Olíbano, Amadeirado, Masculino, Sofisticado, Elegante, Intenso, Marcante, Sedutor, Luxuoso, Envolvente, Poderoso, Refinado, Exclusivo, Misterioso, Quente, Oriental, Noturno, Rico, Viciante.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto37.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino MARLY PARIS</h3><p>Principais Acordes: Amadeirado, Oud, Aromático, Especiado Quente, Âmbar, Doce, Fresco Especiado, Pralinê, Açafrão, Lavanda, Cedro, Patchouli, Couro, Almiscarado, Defumado, Masculino, Sofisticado, Luxuoso, Sedutor, Intenso, Marcante, Envolvente, Poderoso, Refinado, Exclusivo, Elegante, Noturno, Rico, Oriental, Viciante.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+      <div class="card"><div class="card-img"><img src="img/produto38.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino MARLY PARIS</h3><p>Principais Acordes: Amadeirado, Amêndoa, Baunilha, Atalcado, Especiado Quente, Oud, Aromático, Doce, Cremoso, Fresco Especiado, Âmbar, Sândalo, Cardamomo, Lavanda, Heliotrópio, Couro, Elegante, Sofisticado, Masculino, Intenso, Sedutor, Luxuoso, Marcante, Refinado, Envolvente, Poderoso, Noturno, Exclusivo, Rico, Viciante.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
+
+
     </div>
-  </div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto2.jpg"></div><div class="card-body"><span class="tag">Destaque</span> campaign<h3>Fragrâncias Masculino JEAN PAUL GAULTIER </h3><p>Principais Acordes: Baunilha, Doce, Mel, Aromático, Lavanda, Tabaco, Verde, Frescor, Atalcado.</p><div class="preco">R$ 80,00</div><a href="https://wa.me/5514997254815?text=212 VIP" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto3.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino MARLY PARIS</h3><p>Principais Acordos: Tabaco, Baunilha, Quente e Picante, Canela, Doce, Âmbar, Lenhoso, Almiscarado, Pulverulento, Balsâmico.</p><div class="preco">R$ 80,00</div><a href="https://wa.me/5514997254815?text=Bleu" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto4.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino VIKTOR&ROLF</h3><p>Principais Acordes: Especiado Quente, Canela, Tabaco, Doce, Picante Suave, Couro, Aromático, Citrico.</p><div class="preco">R$ 80,00</div><a href="https://wa.me/5514997254815?text=Sauvage" class="btn-card">Comprar</a></div></div>
-  
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto5.jpg"></div><div class="card-body"><span class="tag">Disponível</span><h3>Fragrâncias Masculino MONTBLANC</h3><p>Principais Acordes: Amadeirado, Cítrico, Aromático, Âmbar, Almiscarado, Fresco Especiado, Oud, Picante Suave.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto6.jpg"></div><div class="card-body"><span class="tag">Disponível</span><h3>Fragrâncias Masculino PRADA</h3><p>Principais Acordes: Amadeirado, Atalcado, Floral, Aromático, Âmbar, Almiscarado, Terroso, Fresco.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto7.jpg"></div><div class="card-body"><span class="tag">Disponível</span><h3>Fragrâncias Masculino YVES SAINT LAURENT</h3><p>Principais Acordes: Aromático, Fresco Especiado, Amadeirado, Frutado, Âmbar e Cítrico.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto8.jpg"></div><div class="card-body"><span class="tag">Disponível</span><h3>Fragrâncias Masculino GIVENCHY</h3><p>Principais Acordes: Amadeirado, Aromático, Especiado, Floral, Doce, Âmbar, Cítrico e Baunilha.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto9.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino HUGO BOSS</h3><p>Principais Acordes: Aromático, Amadeirado, Cítrico, Fresco / Aquático, Especiado, Frutado, Almiscarado / Musky, Leather / Couro, Baunilha / Doce, Âmbar, Verde.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto10.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino DOLCE & GABBANA</h3><p>Principais Acordes: Aromático, Floral, Fresco, White Floral (Floral Branco), Aldeídico, Cítrico, Fresh Spicy (Especiado Fresco), Warm Spicy (Especiado Quente), Amadeirado, Frutado, Almiscarado (Musky).</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto11.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino CHANEL</h3><p>Principais Acordes: Cítrico, Aromático, Baunilha, Amadeirado, Atalcado, Almiscarado, Picante Suave, Doce, Fresco Especiado, Cremoso, Âmbar, Fresco, Elegante, Limpo, Refrescante.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto12.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino GISADA</h3><p>Principais Acordes: Frutado, Tropical, Doce, Amadeirado, Baunilha, Especiado Quente, Fresco Especiado, Aromático, Âmbar, Cítrico, Almiscarado, Fresco, Manga, Apimentado, Elegante.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto13.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino LOUISE VUITTON</h3><p>Principais Acordes: Amadeirado, Verde, Aromático, Atalcado, Balsâmico, Especiado Quente, Fresco Especiado, Cítrico, Solar, Cremoso, Elegante, Refrescante, Limpo, Almiscarado, Sofisticado.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto14.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino RABANNE</h3><p>Principais Acordes: Aromático, Fresco Especiado, Verde, Amadeirado, Cítrico, Lavanda, Amargo, Patchouli, Mentolado, Refrescante, Herbal, Elegante, Masculino, Intenso, Moderno.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto15.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino MARLY PARIS</h3><p>Principais Acordes: Tabaco, Baunilha, Especiado Quente, Âmbar, Canela, Doce, Amadeirado, Almiscarado, Atalcado, Balsâmico, Defumado, Incensado, Elegante, Quente, Sedutor.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto16.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino MAISIN MARTIN MARGIELA</h3><p>Principais Acordes: Tabaco, Doce, Baunilha, Rum, Amadeirado, Aromático, Picante Suave, Âmbar, Atalcado, Especiado Quente, Defumado, Alcoólico, Couro, Elegante, Sedutor.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-    
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto17.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino YVES SAINT LAURENT</h3><p>Principais Acordes: Cítrico, Floral Branco, Patchouli, Fresco Especiado, Amadeirado, Doce, Aromático, Almiscarado, Fresco, Âmbar, Atalcado, Terroso, Verde, Musgoso, Elegante, Moderno, Refrescante, Bergamota, Flor de Laranjeira, Amadeirado Floral, Sensual, Marcante, Versátil, Sedutor.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto18.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino CHANEL</h3><p>Principais Acordes: Cítrico, Aromático, Baunilha, Aldeídico, Marinho, Doce, Fresco Especiado, Fresco, Âmbar, Atalcado, Amadeirado, Almiscarado, Limpo, Elegante, Refrescante, Cremoso, Laranja, Aquático, Tonka, Picante, Energético, Vibrante, Sedutor, Esportivo.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-    
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto19.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino 212 VIP BLACK</h3><p>Principais Acordes: Baunilha, Picante Suave, Lavanda, Doce, Balsâmico, Atalcado, Anis, Aromático, Âmbar, Quente, Sedutor, Intenso, Licoroso, Envolvente, Masculino, Elegante, Sofisticado, Noturno, Gourmand, Refinado.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-   
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto20.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino 212 MEN</h3><p>Principais Acordes: Baunilha, Picante Suave, Lavanda, Doce, Balsâmico, Atalcado, Anis, Aromático, Âmbar, Quente, Sedutor, Intenso, Licoroso, Elegante, Amadeirado, Lavanda Negra, Alcaçuz Negro, Baunilha Negra, Marcante, Luxuoso.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto21.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino 212 VIP BLACK</h3><p>Principais Acordes: Baunilha, Aromático, Lavanda, Licoroso, Doce, Âmbar, Picante Suave, Balsâmico, Atalcado, Anis, Amadeirado, Quente, Sedutor, Intenso, Elegante, Noturno, Sofisticado, Sensual, Marcante, Envolvente, Luxuoso.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto22.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino FERRARI BLACK</h3><p>Principais Acordes: Frutado, Baunilha, Especiado Quente, Doce, Cítrico, Canela, Atalcado, Âmbar, Amadeirado, Floral Branco, Aromático, Fresco, Sedutor, Marcante, Quente, Envolvente, Clássico, Maçã, Ameixa, Bergamota, Cardamomo, Jasmim, Cedro, Almíscar, Versátil.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto23.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino RABANNE</h3><p>Principais Acordes: Baunilha, Frutado, Rosa, Doce, Amadeirado, Verde, Atalcado, Balsâmico, Floral, Aromático, Fava Tonka, Patchouli, Davana, Cedro, Osmanthus, Âmbar, Sedutor, Intenso, Sofisticado, Envolvente, Luxuoso, Refinado, Noturno, Poderoso.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto24.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino ANIMALE</h3><p>Principais Acordes: Aromático, Fresco Especiado, Cítrico, Lavanda, Amadeirado, Floral, Terroso, Couro, Musgoso, Fresco, Clássico, Elegante, Sedutor, Marcante, Refrescante, Herbal, Vetiver, Néroli, Limão, Gerânio, Zimbro, Musgo de Carvalho, Envolvente, Tradicional.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto25.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino ARNAF</h3><p>Principais Acordes: Amadeirado, Cítrico, Defumado, Fresco, Aromático, Âmbar, Almiscarado, Frutado, Especiado, Limão, Abacaxi, Bétula, Patchouli, Baunilha, Couro, Elegante, Masculino, Sofisticado, Marcante, Sedutor, Intenso, Refrescante, Limpo, Noturno, Poderoso, Moderno, Envolvente, Versátil, Refinado, Luxuoso.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto26.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino CHANEL</h3><p>Principais Acordes: Cítrico, Âmbar, Amadeirado, Fresco Especiado, Aromático, Especiado Quente, Fresco, Defumado, Balsâmico, Atalcado, Almiscarado, Elegante, Sofisticado, Masculino, Refrescante, Cedro, Incenso, Sândalo, Patchouli, Limão, Toranja, Hortelã, Pimenta Rosa, Moderno, Luxuoso, Marcante, Sedutor, Versátil, Limpo, Intenso.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto27.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino ROJA DOVE</h3><p>Principais Acordes: Amadeirado, Aromático, Fresco Especiado, Cítrico, Âmbar, Doce, Balsâmico, Musgoso, Terroso, Fresco, Couro, Defumado, Verde, Patchouli, Tabaco, Cipreste, Musgo de Carvalho, Incenso, Elegante, Sofisticado, Masculino, Intenso, Sedutor, Luxuoso, Marcante, Refinado, Envolvente, Natural.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto28.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino MARLY PARIS</h3><p>Principais Acordes: Baunilha, Doce, Canela, Âmbar, Especiado Quente, Floral Branco, Cremoso, Almiscarado, Pralinê, Amadeirado, Atalcado, Sedutor, Luxuoso, Elegante, Sofisticado, Masculino, Envolvente, Intenso, Refinado, Quente, Marcante, Gourmand, Viciante, Sensual, Moderno, Poderoso, Noturno, Exclusivo.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto29.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino AFNAN</h3><p>Principais Acordes: Cítrico, Almiscarado, Amadeirado, Fresco, Âmbar, Atalcado, Especiado Quente, Patchouli, Aromático, Refrescante, Bergamota, Mandarina, Musgo, Ambarado, Limpo, Masculino, Elegante, Sofisticado, Moderno, Sedutor, Intenso, Versátil, Envolvente, Marcante, Luxuoso, Aquático, Herbal, Refinado.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto30.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino LATTAFA</h3><p>Principais Acordes: Aromático, Fresco, Amadeirado, Cítrico, Âmbar, Lavanda, Especiado Suave, Almiscarado, Herbal, Verde, Masculino, Elegante, Sofisticado, Sedutor, Moderno, Refrescante, Limpo, Versátil, Marcante, Intenso, Maçã, Gengibre, Zimbro, Sálvia, Fava Tonka, Cedro, Vetiver, Envolvente, Refinado, Poderoso.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto31.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino LATTAFA</h3><p>Principais Acordes: Oud, Especiado Quente, Fresco Especiado, Patchouli, Metálico, Almiscarado, Amadeirado, Lavanda, Terroso, Couro, Açafrão, Noz-moscada, Incensado, Âmbar, Intenso, Masculino, Misterioso, Sofisticado, Marcante, Sedutor, Luxuoso, Envolvente, Poderoso, Oriental, Refinado, Noturno.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div> 
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto32.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino ASAD</h3><p>Principais Acordes: Baunilha, Cacau, Doce, Lavanda, Fresco Especiado, Âmbar, Especiado Quente, Aromático, Atalcado, Picante Suave, Bourbon Vanilla, Vetiver, Noz-moscada, Davana, Ameixa Mirabelle, Pimenta Rosa, Cremoso, Gourmand, Sedutor, Sofisticado, Intenso, Envolvente, Marcante, Luxuoso, Quente.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div> 
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto33.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino ASAD</h3><p>Principais Acordes: Âmbar, Fresco Especiado, Amadeirado, Especiado Quente, Baunilha, Doce, Tabaco, Atalcado, Patchouli, Balsâmico, Aromático, Café, Pimenta Preta, Abacaxi, Íris, Masculino, Sedutor, Intenso, Sofisticado, Marcante, Envolvente, Quente, Elegante, Refinado, Poderoso, Noturno, Luxuoso, Oriental, Viciante, Moderno.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto34.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino AZZARO</h3><p>Principais Acordes: Couro, Frutado, Doce, Aromático, Animálico, Cítrico, Especiado Quente, Defumado, Lavanda, Amadeirado, Framboesa, Cardamomo, Vetiver, Mandarina Verde, Bergamota, Sálvia Esclaréia, Masculino, Sedutor, Intenso, Sofisticado, Marcante, Luxuoso, Envolvente, Poderoso, Moderno, Elegante, Refinado, Noturno, Viciante, Exclusivo.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto35.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino LATTAFA</h3><p>Principais Acordes: Âmbar, Tuberosa, Floral Branco, Animálico, Almiscarado, Aromático, Cítrico, Especiado Quente, Amadeirado, Couro, Cardamomo, Toranja, Pimenta Rosa, Cashmeran, Ládano, Notas Solares, Artemísia, Masculino, Sedutor, Sofisticado, Intenso, Marcante, Luxuoso, Envolvente, Moderno, Refinado, Poderoso, Exclusivo, Elegante, Quente.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto36.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino BVLGARI</h3><p>Principais Acordes: Fresco Especiado, Âmbar, Especiado Quente, Metálico, Fresco, Picante Suave, Couro, Tabaco, Açafrão, Gengibre, Pimenta Rosa, Olíbano, Amadeirado, Masculino, Sofisticado, Elegante, Intenso, Marcante, Sedutor, Luxuoso, Envolvente, Poderoso, Refinado, Exclusivo, Misterioso, Quente, Oriental, Noturno, Rico, Viciante.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto37.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino MARLY PARIS</h3><p>Principais Acordes: Amadeirado, Oud, Aromático, Especiado Quente, Âmbar, Doce, Fresco Especiado, Pralinê, Açafrão, Lavanda, Cedro, Patchouli, Couro, Almiscarado, Defumado, Masculino, Sofisticado, Luxuoso, Sedutor, Intenso, Marcante, Envolvente, Poderoso, Refinado, Exclusivo, Elegante, Noturno, Rico, Oriental, Viciante.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  <div class="card" data-categoria="masculino"><div class="card-img"><img src="img/produto38.jpg"></div><div class="card-body"><span class="tag">Top</span><h3>Fragrâncias Masculino MARLY PARIS</h3><p>Principais Acordes: Amadeirado, Amêndoa, Baunilha, Atalcado, Especiado Quente, Oud, Aromático, Doce, Cremoso, Fresco Especiado, Âmbar, Sândalo, Cardamomo, Lavanda, Heliotrópio, Couro, Elegante, Sofisticado, Masculino, Intenso, Sedutor, Luxuoso, Marcante, Refinado, Envolvente, Poderoso, Noturno, Exclusivo, Rico, Viciante.</p><div class="preco">R$ 80,00</div><a href="#" class="btn-card">Comprar</a></div></div>
-
-  </div>
   </section>
 
   <section class="sobre" id="sobre">
@@ -336,29 +360,35 @@
 
   <a href="https://wa.me/5514997254815" target="_blank" class="whatsapp-fixo">💬</a>
   
-  <script src="script.js"></script>
-
   <script>
-    function filtrarProdutos(categoria) {
-      const cards = document.querySelectorAll('.card');
+    function filtrarProdutos(botaoClicado, categoria, e) {
+      if(e) e.preventDefault(); // Evita bugs de rolagem ou recarregamento
       
+      // 1. Atualizar classe ativa nos botões
+      const botoes = document.querySelectorAll('.btn-filtro');
+      botoes.forEach(btn => btn.classList.remove('ativo'));
+      botaoClicado.classList.add('ativo');
+
+      // 2. Filtrar os cartões de produto analisando o texto do h3
+      const cards = document.querySelectorAll('.card');
       cards.forEach(card => {
-        const catProduto = card.getAttribute('data-categoria');
+        const tituloElemento = card.querySelector('.card-body h3');
+        if (!tituloElemento) return;
         
-        if (categoria === 'todos' || catProduto === categoria) {
+        const textoTitulo = tituloElemento.innerText.toLowerCase();
+
+        if (categoria === 'todos') {
+          card.style.display = 'flex';
+        } else if (categoria === 'masculino' && textoTitulo.includes('masculino')) {
+          card.style.display = 'flex';
+        } else if (categoria === 'feminino' && textoTitulo.includes('feminino')) {
           card.style.display = 'flex';
         } else {
           card.style.display = 'none';
         }
       });
-
-      const botoes = document.querySelectorAll('.btn-filtro');
-      botoes.forEach(btn => btn.classList.remove('ativo'));
-      
-      if(event && event.target) {
-        event.target.classList.add('ativo');
-      }
     }
   </script>
+  <script src="script.js"></script>
 </body>
 </html>
