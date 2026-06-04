@@ -442,9 +442,44 @@
         } else {
           card.style.display = 'none';
         }
-      });
+          });
     }
-  </script>
-  <script src="script.js"></script>
+</script>
+
+<script>
+/* MENU MOBILE */
+function toggleMenu() {
+  document.getElementById('menu').classList.toggle('ativo');
+}
+
+/* BOTÕES COMPRAR */
+document.addEventListener('DOMContentLoaded', function() {
+
+  document.querySelectorAll('.btn-card').forEach(botao => {
+
+    botao.addEventListener('click', function(e) {
+      e.preventDefault();
+
+      const card = this.closest('.card');
+
+      if (!card) return;
+
+      const produto = card.querySelector('h3').innerText;
+
+      const mensagem =
+        `Olá! Tenho interesse no produto: ${produto}`;
+
+      const url =
+        `https://wa.me/5514997254815?text=${encodeURIComponent(mensagem)}`;
+
+      window.open(url, '_blank');
+    });
+
+  });
+
+});
+</script>
+
+<script src="script.js"></script>
 </body>
 </html>
